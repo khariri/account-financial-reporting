@@ -32,9 +32,6 @@
             .total{
                font-weight:bold;
             }
-            div {
-                page-break-inside: avoid;
-            }
             ${css}
         </style>
     </head>

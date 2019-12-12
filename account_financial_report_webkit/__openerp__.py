@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {
-    'name': 'Financial Reports - Webkit',
+    'name': 'Financial Reports - Webkit Versi 2 PT.EDI Indonesia',
     'version': '8.0.1.2.1',
     'author': (
         "Camptocamp,"
@@ -32,7 +32,9 @@
     'images': [
         'images/ledger.png', ],
     'depends': ['account',
-                'report_webkit'],
+                'report_webkit',
+                'operating_unit',
+                'account_operating_unit'],
     'demo': [],
     'data': ['account_view.xml',
              'data/financial_webkit_header.xml',

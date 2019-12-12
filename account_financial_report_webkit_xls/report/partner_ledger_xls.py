@@ -16,6 +16,7 @@ _column_sizes = [
     ('period', 12),
     ('move', 20),
     ('journal', 12),
+    ('operating_unit',12),
     ('partner', 30),
     ('label', 58),
     ('rec', 12),
@@ -69,7 +70,7 @@ class PartnerLedgerXls(report_xls):
             ws, row_pos, row_data, set_column_size=True)
 
         # Header Table
-        nbr_columns = 10
+        nbr_columns = 11
         if _p.amount_currency(data):
             nbr_columns = 12
         cell_format = _xs['bold'] + _xs['fill_blue'] + _xs['borders_all']
@@ -164,6 +165,7 @@ class PartnerLedgerXls(report_xls):
             ('period', 1, 0, 'text', _('Period'), None, c_hdr_cell_style),
             ('move', 1, 0, 'text', _('Entry'), None, c_hdr_cell_style),
             ('journal', 1, 0, 'text', _('Journal'), None, c_hdr_cell_style),
+            ('operating_unit', 1, 0, 'text', _('Operating Unit'), None, c_hdr_cell_style),
             ('partner', 1, 0, 'text', _('Partner'), None, c_hdr_cell_style),
             ('label', 1, 0, 'text', _('Label'), None, c_hdr_cell_style),
             ('rec', 1, 0, 'text', _('Rec.'), None, c_hdr_cell_style),
@@ -259,13 +261,13 @@ class PartnerLedgerXls(report_xls):
                         cumul_balance += part_cumul_balance
                         cumul_balance_curr += part_cumul_balance_curr
 
-                        debit_cell = rowcol_to_cell(row_pos, 7)
-                        credit_cell = rowcol_to_cell(row_pos, 8)
+                        debit_cell = rowcol_to_cell(row_pos, 8)
+                        credit_cell = rowcol_to_cell(row_pos, 9)
                         init_bal_formula = debit_cell + '-' + credit_cell
 
                         # Print row 'Initial Balance' by partn
                         c_specs = [('empty%s' % x, 1, 0, 'text', None)
-                                   for x in range(5)]
+                                   for x in range(6)]
                         c_specs += [
                             ('init_bal', 1, 0, 'text', _('Initial Balance')),
                             ('rec', 1, 0, 'text', None),
@@ -303,11 +305,11 @@ class PartnerLedgerXls(report_xls):
 
                         if init_line or row_pos > row_start_partner:
                             cumbal_formula = rowcol_to_cell(
-                                row_pos - 1, 9) + '+'
+                                row_pos - 1, 10) + '+'
                         else:
                             cumbal_formula = ''
-                        debit_cell = rowcol_to_cell(row_pos, 7)
-                        credit_cell = rowcol_to_cell(row_pos, 8)
+                        debit_cell = rowcol_to_cell(row_pos, 8)
+                        credit_cell = rowcol_to_cell(row_pos, 9)
                         cumbal_formula += debit_cell + '-' + credit_cell
                         # Print row ledger line data #
 
@@ -327,6 +329,7 @@ class PartnerLedgerXls(report_xls):
                             ('move', 1, 0, 'text',
                              line.get('move_name') or ''),
                             ('journal', 1, 0, 'text', line.get('jcode') or ''),
+                            ('operating_unit', 1, 0, 'text', line.get('operating_unit') or ''),
                             ('partner', 1, 0, 'text',
                              line.get('partner_name') or ''),
                             ('label', 1, 0, 'text', label),
@@ -355,23 +358,23 @@ class PartnerLedgerXls(report_xls):
                     # end for line
 
                     # Print row Cumulated Balance by partner #
-                    debit_partner_start = rowcol_to_cell(row_start_partner, 7)
-                    debit_partner_end = rowcol_to_cell(row_pos - 1, 7)
+                    debit_partner_start = rowcol_to_cell(row_start_partner, 8)
+                    debit_partner_end = rowcol_to_cell(row_pos - 1, 8)
                     debit_partner_total = 'SUM(' + debit_partner_start + \
                         ':' + debit_partner_end + ')'
 
-                    credit_partner_start = rowcol_to_cell(row_start_partner, 8)
-                    credit_partner_end = rowcol_to_cell(row_pos - 1, 8)
+                    credit_partner_start = rowcol_to_cell(row_start_partner, 9)
+                    credit_partner_end = rowcol_to_cell(row_pos - 1, 9)
                     credit_partner_total = 'SUM(' + credit_partner_start + \
                         ':' + credit_partner_end + ')'
 
-                    bal_partner_debit = rowcol_to_cell(row_pos, 7)
-                    bal_partner_credit = rowcol_to_cell(row_pos, 8)
+                    bal_partner_debit = rowcol_to_cell(row_pos, 8)
+                    bal_partner_credit = rowcol_to_cell(row_pos, 9)
                     bal_partner_total = bal_partner_debit + \
                         '-' + bal_partner_credit
 
                     c_specs = [('empty%s' % x, 1, 0, 'text', None)
-                               for x in range(5)]
+                               for x in range(6)]
                     c_specs += [
                         ('init_bal', 1, 0, 'text',
                          _('Cumulated balance on Partner')),
@@ -407,7 +410,7 @@ class PartnerLedgerXls(report_xls):
 
                 #  Print row Cumulated Balance by account #
                 c_specs = [
-                    ('acc_title', 5, 0, 'text', ' - '.
+                    ('acc_title', 6, 0, 'text', ' - '.
                      join([account.code, account.name])), ]
                 c_specs += [
                     ('label', 1, 0, 'text', _('Cumulated balance on Account')),

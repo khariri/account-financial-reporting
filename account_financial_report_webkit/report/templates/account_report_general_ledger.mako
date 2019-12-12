@@ -8,9 +8,6 @@
                 overflow: hidden;
                 white-space: nowrap;
             }
-            div {
-                page-break-inside: avoid;
-            }
             ${css}
         </style>
     </head>
@@ -27,9 +24,9 @@
         %>
 
         %if amount_currency(data):
-        <div class="act_as_table data_table" style="width: 1205px;">
+        <div class="act_as_table data_table" style="width: 1275px;">
         %else:
-        <div class="act_as_table data_table" style="width: 1100px;">
+        <div class="act_as_table data_table" style="width: 1170px;">
         %endif
             <div class="act_as_row labels">
                 <div class="act_as_cell">${_('Chart of Account')}</div>
@@ -103,6 +100,8 @@
                         <div class="act_as_cell" style="width: 100px;">${_('Entry')}</div>
                         ## journal
                         <div class="act_as_cell" style="width: 70px;">${_('Journal')}</div>
+                        ## opr hariri
+                        <div class="act_as_cell" style="width: 70px;">${_(' Operating Unit ')}</div>
                         ## account code
                         <div class="act_as_cell" style="width: 65px;">${_('Account')}</div>
                         ## partner
@@ -144,6 +143,8 @@
                           ## move
                           <div class="act_as_cell"></div>
                           ## journal
+                          <div class="act_as_cell"></div>
+                          ## opr hariri
                           <div class="act_as_cell"></div>
                           ## account code
                           <div class="act_as_cell"></div>
@@ -191,6 +192,8 @@
                           <div class="act_as_cell">${line.get('move_name') or ''}</div>
                           ## journal
                           <div class="act_as_cell">${line.get('jcode') or ''}</div>
+                          ## opr hariri
+                          <div class="act_as_cell">${line.get('operating_unit') or ''}</div>
                           ## account code
                           <div class="act_as_cell">${account.code}</div>
                           ## partner
@@ -219,7 +222,7 @@
                 <div class="act_as_table list_table">
                     <div class="act_as_row labels" style="font-weight: bold;">
                         ## date
-                        <div class="act_as_cell first_column" style="width: 615px;">${account.code} - ${account.name}</div>
+                        <div class="act_as_cell first_column" style="width: 685px;">${account.code} - ${account.name}</div>
                         <div class="act_as_cell" style="width: 260px;">${_("Cumulated Balance on Account")}</div>
                         ## debit
                         <div class="act_as_cell amount" style="width: 75px;">${ formatLang(cumul_debit) | amount }</div>

@@ -105,12 +105,14 @@
                             <div class="act_as_cell" style="width: 100px;">${_('Entry')}</div>
                             ## journal
                             <div class="act_as_cell" style="width: 70px;">${_('Journal')}</div>
+                            ## opr hariri
+                            <div class="act_as_cell" style="width: 70px;">${_(' Operating Unit ')}</div>
                             ## partner
                             <div class="act_as_cell" style="width: 100px;">${_('Partner')}</div>
                             ## move reference
                             <div class="act_as_cell" style="width: 60px;">${_('Reference')}</div>
                             ## label
-                            <div class="act_as_cell" style="width: 280px;">${_('Label')}</div>
+                            <div class="act_as_cell" style="width: 210px;">${_('Label')}</div>
                             ## reconcile
                             <div class="act_as_cell" style="width: 80px;">${_('Rec.')}</div>
                             ## debit
@@ -149,6 +151,8 @@
                               ## move
                               <div class="act_as_cell"></div>
                               ## journal
+                              <div class="act_as_cell"></div>
+                              ## opr hariri
                               <div class="act_as_cell"></div>
                               ## partner
                               <div class="act_as_cell"></div>
@@ -193,6 +197,8 @@
                               <div class="act_as_cell">${line.get('move_name') or ''}</div>
                               ## journal
                               <div class="act_as_cell">${line.get('jcode') or ''}</div>
+                              ## opr hariri
+                              <div class="act_as_cell">${line.get('operating_unit') or ''}</div>
                               ## partner
                               <div class="act_as_cell overflow_ellipsis">${line.get('partner_name') or ''}</div>
                               ## move reference
@@ -224,6 +230,8 @@
                           ## move
                           <div class="act_as_cell"></div>
                           ## journal
+                          <div class="act_as_cell"></div>
+                          ## opr hariri
                           <div class="act_as_cell"></div>
                           ## partner
                           <div class="act_as_cell"></div>

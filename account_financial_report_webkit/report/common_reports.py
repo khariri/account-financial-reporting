@@ -525,6 +525,7 @@ SELECT l.id AS id,
             l.date AS ldate,
             j.code AS jcode ,
             j.type AS jtype,
+            x.name AS operating_unit,
             l.currency_id,
             l.account_id,
             l.amount_currency,
@@ -557,6 +558,7 @@ FROM account_move_line l
     LEFT JOIN account_invoice i on (m.id =i.move_id)
     LEFT JOIN account_period per on (per.id=l.period_id)
     JOIN account_journal j on (l.journal_id=j.id)
+    LEFT JOIN operating_unit x on (i.operating_unit_id= x.id)
     WHERE l.id in %s"""
         monster += (" ORDER BY %s" % (order,))
         try:
